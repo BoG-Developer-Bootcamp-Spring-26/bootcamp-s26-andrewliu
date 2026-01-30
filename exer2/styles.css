@@ -1,0 +1,448 @@
+/* design system & css variables */
+:root {
+  --background: hsl(220, 20%, 97%);
+  --foreground: hsl(220, 30%, 15%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(220, 30%, 15%);
+  --primary: hsl(220, 25%, 20%);
+  --primary-foreground: hsl(45, 100%, 96%);
+  --secondary: hsl(45, 80%, 55%);
+  --secondary-foreground: hsl(220, 30%, 15%);
+  --muted: hsl(220, 15%, 92%);
+  --muted-foreground: hsl(220, 15%, 45%);
+  --accent: hsl(45, 90%, 60%);
+  --accent-foreground: hsl(220, 30%, 15%);
+  --border: hsl(220, 15%, 88%);
+  --input: hsl(220, 15%, 88%);
+  
+  /* custom design tokens */
+  --gradient-warm: linear-gradient(135deg, hsl(45, 90%, 60%, 0.15), hsl(35, 85%, 50%, 0.1));
+  --gradient-hero: linear-gradient(180deg, hsl(220, 20%, 97%), hsl(220, 15%, 94%));
+  --shadow-card: 0 25px 50px -12px hsl(220, 30%, 15%, 0.15), 0 12px 24px -8px hsl(220, 30%, 15%, 0.1);
+  --shadow-card-hover: 0 35px 60px -15px hsl(220, 30%, 15%, 0.2), 0 15px 30px -10px hsl(220, 30%, 15%, 0.15);
+  
+  /* typography */
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+/* reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+}
+
+/* layout */
+.card-container {
+  background: var(--gradient-hero);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  position: relative;
+}
+
+/* background decorative elements */
+.bg-decoration {
+  position: fixed;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(60px);
+}
+
+.bg-decoration-1 {
+  top: 80px;
+  left: 40px;
+  width: 288px;
+  height: 288px;
+  background: hsl(45, 90%, 60%, 0.05);
+}
+
+.bg-decoration-2 {
+  bottom: 80px;
+  right: 40px;
+  width: 384px;
+  height: 384px;
+  background: hsl(45, 80%, 55%, 0.1);
+}
+
+/* info card */
+.info-card {
+  background: var(--card);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: 448px;
+  width: 100%;
+  margin: 16px;
+  animation: slideUp 0.6s ease-out forwards;
+}
+
+.info-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-8px);
+}
+
+.accent-bar {
+  background: linear-gradient(90deg, var(--accent), var(--secondary));
+  height: 4px;
+}
+
+.card-content {
+  padding: 32px;
+}
+
+/* header */
+.header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, hsl(45, 90%, 60%, 0.2), hsl(45, 80%, 55%, 0.3));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: float 6s ease-in-out infinite;
+}
+
+.avatar-icon {
+  font-size: 32px;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.name {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--foreground);
+  letter-spacing: -0.025em;
+  margin-bottom: 4px;
+}
+
+.username {
+  color: var(--muted-foreground);
+  font-weight: 500;
+}
+
+.username-link {
+  color: var(--muted-foreground);
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-block;
+}
+
+.username-link:hover {
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+/* info sections */
+.info-sections {
+  margin-bottom: 24px;
+  animation: fadeIn 0.8s ease-out 0.3s forwards;
+  opacity: 0;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.tag-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 500;
+  background: hsl(45, 90%, 60%, 0.15);
+  color: var(--accent-foreground);
+  border: 1px solid hsl(45, 90%, 60%, 0.3);
+}
+
+.locations-container {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted-foreground);
+  font-size: 14px;
+}
+
+.passion-section {
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.passion-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.passion-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted-foreground);
+}
+
+.heart-icon {
+  color: var(--accent);
+  animation: pulseSoft 3s ease-in-out infinite;
+}
+
+.passion-text {
+  color: var(--foreground);
+  line-height: 1.6;
+}
+
+/* interactive section */
+.interactive-section {
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+
+.message-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted-foreground);
+  margin-bottom: 16px;
+}
+
+.message-input-container {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.text-input-styled {
+  width: 100%;
+  padding: 12px 48px 12px 16px;
+  border-radius: 12px;
+  border: 2px solid var(--border);
+  background: var(--background);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.text-input-styled:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px hsl(45, 90%, 60%, 0.15);
+}
+
+.send-button {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 8px;
+  border-radius: 8px;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.send-button:hover {
+  opacity: 0.9;
+}
+
+.submission-message {
+  font-size: 14px;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* action buttons */
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+.interactive-btn {
+  flex: 1;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(135deg, var(--primary), hsl(220, 25%, 25%));
+  color: var(--primary-foreground);
+}
+
+.interactive-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px hsl(220, 25%, 20%, 0.4);
+}
+
+.interactive-btn:active {
+  transform: translateY(0);
+}
+
+.connect-btn {
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 2px solid var(--border);
+  color: var(--foreground);
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.connect-btn:hover {
+  background: var(--muted);
+}
+
+/* extra info */
+.extra-info {
+  margin-top: 16px;
+  padding: 0 16px;
+  border-radius: 12px;
+  background: hsl(220, 15%, 92%, 0.5);
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.extra-info.show {
+  max-height: 200px;
+  opacity: 1;
+  padding: 16px;
+}
+
+.extra-info-title {
+  font-weight: 600;
+  color: var(--foreground);
+  margin-bottom: 8px;
+}
+
+.extra-info-list {
+  list-style: none;
+}
+
+.extra-info-list li {
+  font-size: 14px;
+  color: var(--muted-foreground);
+  margin-bottom: 4px;
+}
+
+/* icons */
+.icon {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+/* utility classes */
+.hidden {
+  display: none;
+}
+
+/* animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulseSoft {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* responsive design */
+@media (max-width: 480px) {
+  .card-container {
+    padding: 16px;
+  }
+  
+  .card-content {
+    padding: 24px;
+  }
+  
+  .header {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+  
+  .tags {
+    justify-content: center;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+}
