@@ -1,30 +1,37 @@
 // returns the name, sprite, and type of random Pokemon
 import type { NextApiRequest, NextApiResponse } from "next";
+import { fetchPokemon } from "../../utils/fetch";
 
-type Data = {
+type PokemonData = {
   name: string;
   sprite: string;
   type: string;
   message: string;
 };
 
-export default function handler(
+type ErrorData = {
+  message: string;
+}
+
+export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>,
+  res: NextApiResponse<PokemonData | ErrorData>,
 ) {
-  if (req.method === "POST") {
-    res.status(200).json({ 
-      name: "John Doe",
-      sprite: "link",
-      type: "normal",
-      message: "Success" 
+  if (req.method !== "GET") {
+    return res.status(405).json({ message: "Method not allowed" });
+  }
+
+  try {
+    const randomId = Math.floor(Math.random() * 1025) + 1;
+    const data = await fetchPokemon(randomId.toString());
+
+    return res.status(200).json({ 
+      name: data.name,
+      sprite: data.sprite,
+      type: data.type,
+      message: "Successfully fetched random Pokemon!" 
     });
-  } else {
-    res.status(500).json({ 
-      name: "John Doe",
-      sprite: "link",
-      type: "normal",
-      message: "Method not allowed" 
-    });
+  } catch (error) {
+    res.status(500).json({ message: "An error occurred" });
   }
 }
